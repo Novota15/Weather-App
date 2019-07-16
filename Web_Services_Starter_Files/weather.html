@@ -138,15 +138,19 @@
 
 				*/
 
-				javascript_time.getDay()
+				var today = javascript_time.getDay();
+				var tomorrow = today + 1;
 
 				var week_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; //This is a helper array to help convert the day of the week [0-7] to a named value [Sunday - Saturday]
 				
 				const container = document.getElementById('6_day_forecast');
 
-				var day_count = 0;
+				var arr1 = week_names.slice(tomorrow, (tomorrow + 6) - (7 % tomorrow));
+				var six_days = arr1.concat(week_names.slice(0, 7 % tomorrow));
 
-				week_names.forEach((day, idx) => {
+				console.log(today);
+				console.log(six_days);
+				six_days.forEach((day, idx) => {
 				// create card element
 				const card = document.createElement('div');
 				card.classList = 'card-body';
@@ -157,7 +161,7 @@
 						<div class="card">
 							<img class="card-img-top" src="img/` + data.daily.data[idx].icon + `.png" alt="Card image cap">
 							<div class="card-body">
-								<h5 class="card-title">` + week_names[idx] + `</h5>
+								<h5 class="card-title">` + six_days[idx] + `</h5>
 								<p class="card-text">High: ` +  data.daily.data[idx].apparentTemperatureHigh + ` F<br> 
 									Low: ` + data.daily.data[idx].apparentTemperatureLow + ` F</p>
 							</div>
