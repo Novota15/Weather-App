@@ -97,8 +97,22 @@
 					8. summary_today: This will be updated to match the current summary for the day's weather.
 
 				*/
-				document.getElementById("temp_today").innerHTML = data.currently.apparentTemperature + " F";
+
+				document.getElementById("image_today").src = "img/" + data.currently.icon + ".png";
 				
+				document.getElementById("icon_today").innerHTML = data.currently.icon;
+
+				document.getElementById("temp_today").innerHTML = data.currently.apparentTemperature + " F";
+
+				document.getElementById("thermometer_inner").style.height = data.currently.apparentTemperature + "%";
+
+				document.getElementById("precip_today").textContent = (data.currently.precipProbability * 100) + "%";
+
+				document.getElementById("humidity_today").textContent = (data.currently.humidity * 100) + "%";
+
+				document.getElementById("wind_today").textContent = data.currently.windSpeed;
+
+				document.getElementById("summary_today").textContent = data.currently.summary;
 
 				/* Process the daily forecast for the next 6 days */
 				/*
@@ -123,8 +137,38 @@
 					be set to the innerHTML for the 6_day_forecast.
 
 				*/
+
+				javascript_time.getDay()
+
 				var week_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; //This is a helper array to help convert the day of the week [0-7] to a named value [Sunday - Saturday]
 				
+				const container = document.getElementById('6_day_forecast');
+
+				var day_count = 0;
+
+				week_names.forEach((day, idx) => {
+				// create card element
+				const card = document.createElement('div');
+				card.classList = 'card-body';
+
+				// card content
+				const content = `
+				<div class="col-2">
+						<div class="card">
+							<img class="card-img-top" src="img/` + data.daily.data[idx].icon + `.png" alt="Card image cap">
+							<div class="card-body">
+								<h5 class="card-title">` + week_names[idx] + `</h5>
+								<p class="card-text">High: ` +  data.daily.data[idx].apparentTemperatureHigh + ` F<br> 
+									Low: ` + data.daily.data[idx].apparentTemperatureLow + ` F</p>
+							</div>
+						</div>
+					</div>
+				`;
+
+				// append created card element to the container
+				container.innerHTML += content;
+				})
+
 			})
 		})
  	</script>
