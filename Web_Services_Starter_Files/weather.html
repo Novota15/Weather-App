@@ -17,7 +17,7 @@
   <body>
   	<div class="container">
 		<br>
-		<h1 style="text-align:center">Weather Forecast</h1>
+		<h1 style="text-align:center">Weather Forecast for Boulder, CO</h1>
 		<hr>
 		<div class="row">
 			<div class="col-4">
@@ -140,13 +140,16 @@
 
 				var today = javascript_time.getDay();
 				var tomorrow = today + 1;
-
+				if (today == 7) {
+				tomorrow = 0;
+				}
+				
 				var week_names = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']; //This is a helper array to help convert the day of the week [0-7] to a named value [Sunday - Saturday]
 				
 				const container = document.getElementById('6_day_forecast');
 
 				var arr1 = week_names.slice(tomorrow, (tomorrow + 6) - (7 % tomorrow));
-				var six_days = arr1.concat(week_names.slice(0, 7 % tomorrow));
+				var six_days = arr1.concat(week_names.slice(0, tomorrow - 1));
 
 				console.log(today);
 				console.log(six_days);
