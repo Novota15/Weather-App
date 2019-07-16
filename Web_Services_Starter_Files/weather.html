@@ -68,6 +68,10 @@
 				console.log(data);//Review all of the data returned
 				console.log("Current Temp: " + data.currently.apparentTemperature);//View Today's Temp
 				console.log("Tomorrow's High: " + data.daily.data[1].apparentTemperatureHigh);//View Tomorrow's High
+				var unix_time = data.currently.time;//Retrieve the current timestamp
+				var javascript_time = new Date(unix_time * 1000);//Convert the unix time stamp to javascript
+				console.log(javascript_time);
+				console.log(javascript_time.getDay());
 				/* 
 					Read the current weather information from the data point values [https://darksky.net/dev/docs#data-point] to 
 					update the webpage for today's weather:
@@ -93,6 +97,7 @@
 					8. summary_today: This will be updated to match the current summary for the day's weather.
 
 				*/
+				document.getElementById("temp_today").innerHTML = data.currently.apparentTemperature + " F";
 				
 
 				/* Process the daily forecast for the next 6 days */
